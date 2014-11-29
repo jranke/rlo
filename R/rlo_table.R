@@ -24,11 +24,48 @@ rlo_table <- function(x, captiontext,
                                   rep("Potatoes", 2)),
                          Application = application_factor)
 
+  if (merge_factors) {
+    mergelist = list()
+    for (fi in seq_along(factors)) {
+      factor_col = LETTERS[fi]
+      f <- factors[[fi]]
+      mergelist[[factor_col]] <- list()
+      merge_start = 1
+      merge_end = 1
+      merge_factor = f[merge_start]
+      merge_count = 0
+      for (i in 1:length(f)) {
+        if (f[i] == merge_factor) {
+          if (i != merge_start) {
+            factors[[fi]][i] = ""
+            if (is.na(f[i + 1])) {
+                merge_count = merge_count + 1
+                merge_end = i
+                entry <- c(start = merge_start, end = merge_end)
+                mergelist[[factor_col]][[merge_count]] = entry
+            }
+            else if (f[i + 1] != merge_factor) {
+                merge_count = merge_count + 1
+                merge_end = i
+                entry <- c(start = merge_start, end = merge_end)
+                mergelist[[factor_col]][[merge_count]] = entry
+            }
+          }
+        } else {
+          merge_start = i
+          merge_end = i
+          merge_factor = f[merge_start]
+        }
+      }
+    }
+  }
+
   if (!is.null(factors)) {
     for (i in length(factors):1) {
       x <- cbind(c(names(factors)[i], factors[[i]]), x)
     }
   }
+
 
   dimnames(x) <- NULL
 
@@ -39,7 +76,16 @@ rlo_table <- function(x, captiontext,
   python.exec("tbl.setDataArray(x)")
 
   if (merge_factors) {
-    #python.exec("tcursor.mergeRange()")
+    for (factor_col in names(mergelist)) {
+      for (ei in seq_along(mergelist[[factor_col]])) {
+        entry = mergelist[[factor_col]][[ei]]
+        python.assign("cellname", paste0(factor_col, entry["start"] + 1))
+        python.exec("tcursor = tbl.createCursorByCellName(cellname)")
+        stepsize = entry["end"] - entry["start"]
+        python.exec(paste0("tcursor.goDown(", stepsize, ", True)"))
+        python.exec("tcursor.mergeRange()")
+      }
+    }
   }
 
   if (is.null(footer)) {
