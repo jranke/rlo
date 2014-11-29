@@ -1,6 +1,6 @@
 rlo_table <- function(x, captiontext, 
                       header = "colnames", footer = NULL,
-                      factors = NULL, merge_factors = TRUE,
+                      factors = NULL, merge_index = NULL,
                       numbered = TRUE, cursor = "scursor") {
   python.exec("scursor.setPropertyValue('ParaStyleName', 'Table')")
   if (numbered) {
@@ -20,14 +20,10 @@ rlo_table <- function(x, captiontext,
     x <- rbind(header, x)
   }
 
-          factors = list(Crop = c(rep("Winter cereals", 4), rep("Spring cereals", 2), 
-                                  rep("Potatoes", 2)),
-                         Application = application_factor)
-
-  if (merge_factors) {
-    mergelist = list()
-    for (fi in seq_along(factors)) {
-      factor_col = LETTERS[fi]
+  mergelist = list()
+  for (fi in seq_along(factors)) {
+    factor_col = LETTERS[fi]
+    if (factor_col %in% merge_index) {
       f <- factors[[fi]]
       mergelist[[factor_col]] <- list()
       merge_start = 1
@@ -75,8 +71,8 @@ rlo_table <- function(x, captiontext,
   python.exec("x = tuple(tuple(i) for i in x)")
   python.exec("tbl.setDataArray(x)")
 
-  if (merge_factors) {
-    for (factor_col in names(mergelist)) {
+  for (factor_col in names(mergelist)) {
+    if (factor_col %in% merge_index) {
       for (ei in seq_along(mergelist[[factor_col]])) {
         entry = mergelist[[factor_col]][[ei]]
         python.assign("cellname", paste0(factor_col, entry["start"] + 1))
