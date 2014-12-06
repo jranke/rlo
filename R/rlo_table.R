@@ -1,8 +1,13 @@
 rlo_table <- function(x, captiontext, 
                       header = "colnames", footer = NULL,
                       factors = NULL, merge_index = NULL,
-                      numbered = TRUE, cursor = "scursor") {
+                      numbered = TRUE, 
+                      break_before_caption = FALSE,
+                      first_column_width = "default") {
   python.exec("scursor.setPropertyValue('ParaStyleName', 'Table')")
+  if (break_before_caption) {
+    python.exec("scursor.setPropertyValue('BreakType', 4)") # PAGE_BEFORE
+  }
   if (numbered) {
     python.exec("text.insertString(scursor, 'Table ', False)")
     rlo_dispatch(".uno:InsertField", 
@@ -92,5 +97,11 @@ rlo_table <- function(x, captiontext,
     python.exec("text.insertString(scursor, footer, False)")
     python.exec("text.insertControlCharacter(scursor, 0, False)")
     python.exec("scursor.setPropertyValue('ParaStyleName', 'Textkörper mit Abstand')")
+  }
+
+  if (first_column_width != "default") {
+    python.exec("tcursor = tbl.createCursorByCellName('A1')")
+    
+    
   }
 }
