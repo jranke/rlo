@@ -7,10 +7,14 @@ rlo_table <- function(x, captiontext,
                       numbered = TRUE, 
                       break_before_caption = FALSE,
                       split = FALSE,
-                      first_column_width = "default") {
+                      charheight = NULL)
+{
   python.exec("scursor.setPropertyValue('ParaStyleName', 'Table')")
+  python.exec("scursor.setPropertyValue('ParaKeepTogether', True)")
   if (break_before_caption) {
     python.exec("scursor.setPropertyValue('BreakType', 4)") # PAGE_BEFORE
+  } else {
+    python.exec("scursor.setPropertyValue('BreakType', 0)") # NONE
   }
   if (numbered) {
     python.exec("text.insertString(scursor, 'Table ', False)")
@@ -106,6 +110,11 @@ rlo_table <- function(x, captiontext,
   python.exec("x = tuple(tuple(i) for i in x)")
   python.exec("tbl.setDataArray(x)")
 
+  cellrange = paste0("A1:", LETTERS[ncol(x)], nrow(x))
+  if (!is.null(charheight)) {
+    python.exec(paste0("tbl.getCellRangeByName('", cellrange, "').CharHeight = ", charheight))
+  }
+
   # Merge factor columns if requested
   for (factor_col in names(mergelist)) {
     if (factor_col %in% merge_index) {
@@ -120,7 +129,7 @@ rlo_table <- function(x, captiontext,
     }
   }
 
-  # Merge headers of factor columns and group header fields if group header is present
+  # Merge headers of factor columns (vertically) and group header fields if group header is present
   if (!is.null(group_header)) {
     for (factor_index in seq_along(factors)) {
       factor_col = LETTERS[factor_index]    
@@ -143,14 +152,12 @@ rlo_table <- function(x, captiontext,
     python.exec("scursor.setPropertyValue('ParaStyleName', 'Textkörper mit Abstand')")
   } else {
     python.exec("scursor.setPropertyValue('ParaStyleName', 'Tabellenunterschrift')")
+    if (!is.null(charheight)) {
+      python.exec(paste0("scursor.setPropertyValue('CharHeight', ", charheight, ")"))
+    }
     python.assign("footer", footer)
     python.exec("text.insertString(scursor, footer, False)")
     python.exec("text.insertControlCharacter(scursor, 0, False)")
     python.exec("scursor.setPropertyValue('ParaStyleName', 'Textkörper mit Abstand')")
   }
-
-  # Sizing of columns not implemented
-#   if (first_column_width != "default") {
-#     python.exec("tcursor = tbl.createCursorByCellName('A1')")
-#   }
 }
