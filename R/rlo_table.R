@@ -6,6 +6,7 @@ rlo_table <- function(x, captiontext,
                       factors = NULL, merge_index = NULL,
                       numbered = TRUE, 
                       break_before_caption = FALSE,
+                      split = FALSE,
                       first_column_width = "default") {
   python.exec("scursor.setPropertyValue('ParaStyleName', 'Table')")
   if (break_before_caption) {
@@ -21,6 +22,10 @@ rlo_table <- function(x, captiontext,
   python.exec("text.insertString(scursor, captiontext, False)")
 
   python.exec("tbl = doc.createInstance('com.sun.star.text.TextTable')")
+
+  if (split) python.exec("tbl.Split = True")
+  else python.exec("tbl.Split = False")
+
   if (header[1] == "colnames") {
     header <- colnames(x)
   }
