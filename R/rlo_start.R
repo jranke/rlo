@@ -30,7 +30,7 @@ rlo_start <- function(file = NULL,
   system(command, wait = FALSE)
   Sys.sleep(sleep_time)
 
-  # Get the UNO objects
+  # Get UNO objects
   rlo_connect()
 
   # Set the title if requested
