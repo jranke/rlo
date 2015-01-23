@@ -7,7 +7,8 @@ rlo_table <- function(x, captiontext,
                       numbered = TRUE, 
                       break_before_caption = FALSE,
                       split = FALSE,
-                      charheight = NULL)
+                      charheight = NULL, 
+                      widths = NULL)
 {
   python.exec("scursor.setPropertyValue('ParaStyleName', 'Table')")
   python.exec("scursor.setPropertyValue('ParaKeepTogether', True)")
@@ -109,6 +110,20 @@ rlo_table <- function(x, captiontext,
   python.assign("x", x)
   python.exec("x = tuple(tuple(i) for i in x)")
   python.exec("tbl.setDataArray(x)")
+
+  # Set cell widths
+  if (!is.null(widths)) {
+    if (length(widths) > ncol(x)) stop("You specified more cell widths than the number of columns")
+    if (length(widths) < ncol(x)) widths = c(widths, rep(1, ncol(x) - length(widths)))
+    
+    separators = round(cumsum(widths) / sum(widths) * 10000)
+
+    python.exec("tcs = tbl.TableColumnSeparators")
+    for (i in 0:(length(separators) - 2)) {
+      python.exec(paste0("tcs[", i, "].Position = ", separators[i + 1]))
+    }
+    python.exec("tbl.TableColumnSeparators = tcs")
+  }
 
   cellrange = paste0("A1:", LETTERS[ncol(x)], nrow(x))
   if (!is.null(charheight)) {
