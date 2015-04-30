@@ -10,6 +10,8 @@ rlo_table <- function(x, captiontext,
                       charheight = NULL, 
                       widths = NULL)
 {
+  rlo_scursor()
+
   python.exec("scursor.setPropertyValue('ParaStyleName', 'Table')")
   python.exec("scursor.setPropertyValue('ParaKeepTogether', True)")
   if (break_before_caption) {
