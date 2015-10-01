@@ -1,4 +1,4 @@
-#' Function to use the dispatcher to use GUI functions
+#' Function to insert a heading
 #'
 #' @importFrom PythonInR pyExec
 #' @export

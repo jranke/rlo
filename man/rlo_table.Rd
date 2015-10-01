@@ -6,8 +6,8 @@
 \usage{
 rlo_table(x, captiontext, header = "colnames", group_header = NULL,
   group_sizes = NULL, footer = NULL, factors = NULL, merge_index = NULL,
-  numbered = TRUE, break_before_caption = FALSE, split = FALSE,
-  charheight = NULL, widths = NULL)
+  numbered = TRUE, NA_string = "", break_before_caption = FALSE,
+  split = FALSE, charheight = NULL, widths = NULL)
 }
 \arguments{
 \item{x}{A matrix of character vectors to be inserted as a table}
@@ -30,6 +30,8 @@ rows of the matrix object}
 which adjacent cells with identical values should be merged}
 
 \item{numbered}{Should the caption of the table be numbered?}
+
+\item{NA_string}{The string used for NA values}
 
 \item{split}{Should it be allowed to split the table across pages}
 

@@ -2,11 +2,11 @@
 % Please edit documentation in R/rlo_heading.R
 \name{rlo_heading}
 \alias{rlo_heading}
-\title{Function to use the dispatcher to use GUI functions}
+\title{Function to insert a heading}
 \usage{
 rlo_heading(heading, level = 2, break_before = FALSE)
 }
 \description{
-Function to use the dispatcher to use GUI functions
+Function to insert a heading
 }
 
