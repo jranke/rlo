@@ -1,3 +1,7 @@
+#' Function to get the current view cursor in the active document
+#'
+#' @importFrom PythonInR pyExec
+#' @export
 rlo_scursor <- function() {
-  python.exec("scursor = text.createTextCursorByRange(doc.CurrentController.ViewCursor)")
+  pyExec("scursor = text.createTextCursorByRange(doc.CurrentController.ViewCursor)")
 }

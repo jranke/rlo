@@ -1,3 +1,13 @@
+#' Function to start a new jrwb report
+#'
+#' @importFrom PythonInR pyExec
+#' @param file The file to create
+#' @param title The title of the document
+#' @param template The template file if to be used
+#' @param overwrite Should an existing file be overwritten?
+#' @param sleep_time The time to sleep after starting LibreOffice before
+#'   trying to connect
+#' @export
 rlo_start <- function(file = NULL,
                       title = NULL,
                       template = NULL,
@@ -35,6 +45,6 @@ rlo_start <- function(file = NULL,
 
   # Set the title if requested
   if (!is.null(title)) {
-    python.exec(paste0("doc.DocumentProperties.Title = '", title, "'"))
+    pyExec(paste0("doc.DocumentProperties.Title = '", title, "'"))
   }
 }

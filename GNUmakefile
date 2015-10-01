@@ -27,6 +27,9 @@ NEWS: NEWS.md
 $(TGZ): $(pkgfiles)
 	cd ..;\
 		"$(RBIN)/R" CMD build $(PKGSRC)
+
+roxygen: 
+	"$(RBIN)/Rscript" -e 'library(roxygen2); roxygenize(".")'
                 
 build: $(TGZ)
 

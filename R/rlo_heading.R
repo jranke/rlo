@@ -1,14 +1,18 @@
+#' Function to use the dispatcher to use GUI functions
+#'
+#' @importFrom PythonInR pyExec
+#' @export
 rlo_heading <- function(heading, level = 2, break_before = FALSE) {
   rlo_scursor()
 
-  python.exec(paste0("scursor.setPropertyValue('ParaStyleName', 'Überschrift ", level, "')"))
+  pyExec(paste0("scursor.setPropertyValue('ParaStyleName', 'Überschrift ", level, "')"))
   if (break_before) {
-    python.exec("scursor.setPropertyValue('BreakType', 4)") # PAGE_BEFORE
+    pyExec("scursor.setPropertyValue('BreakType', 4)") # PAGE_BEFORE
   } else {
-    python.exec("scursor.setPropertyValue('BreakType', 0)") # NONE
+    pyExec("scursor.setPropertyValue('BreakType', 0)") # NONE
   }
 
-  python.assign("heading", heading)
-  python.exec("text.insertString(scursor, heading, False)")
-  python.exec("text.insertControlCharacter(scursor, 0, False)")
+  pySet("heading", heading)
+  pyExec("text.insertString(scursor, heading, False)")
+  pyExec("text.insertControlCharacter(scursor, 0, False)")
 }

@@ -1,10 +1,34 @@
+#' Function to insert a table into the connected document
+#' 
+#' Inserts a table at the current position of the view cursor.
+#'
+#' @importFrom PythonInR pyExec
+#' @param x A matrix of character vectors to be inserted as a table
+#' @param captiontext The text of the caption
+#' @param header The names to be used for the columns of the matrix
+#' @param group_header If not NULL, the names of column groups
+#' @param group_sizes If group_header is not NULL, a vector holding the sizes of 
+#'   column groups
+#' @param footer An optional text to be included as a table footer
+#' @param factors An optional named list of character vectors that must describe the
+#'   rows of the matrix object
+#' @param merge_index An optional character vector with the names of the factors for
+#'   which adjacent cells with identical values should be merged 
+#' @param numbered Should the caption of the table be numbered?
+#' @param NA_string The string used for NA values
+#' @param bread_before_caption Should a page break be insersted before the caption
+#' @param split Should it be allowed to split the table across pages
+#' @param charheight An optional way to specify the character height in table cells
+#' @param widths An optional way to specify relative columns widths
+#' @export
 rlo_table <- function(x, captiontext, 
                       header = "colnames", 
                       group_header = NULL,
                       group_sizes = NULL,
                       footer = NULL,
                       factors = NULL, merge_index = NULL,
-                      numbered = TRUE, 
+                      numbered = TRUE,
+                      NA_string = "",                      
                       break_before_caption = FALSE,
                       split = FALSE,
                       charheight = NULL, 
@@ -12,26 +36,26 @@ rlo_table <- function(x, captiontext,
 {
   rlo_scursor()
 
-  python.exec("scursor.setPropertyValue('ParaStyleName', 'Table')")
-  python.exec("scursor.setPropertyValue('ParaKeepTogether', True)")
+  pyExec("scursor.setPropertyValue('ParaStyleName', 'Table')")
+  pyExec("scursor.setPropertyValue('ParaKeepTogether', True)")
   if (break_before_caption) {
-    python.exec("scursor.setPropertyValue('BreakType', 4)") # PAGE_BEFORE
+    pyExec("scursor.setPropertyValue('BreakType', 4)") # PAGE_BEFORE
   } else {
-    python.exec("scursor.setPropertyValue('BreakType', 0)") # NONE
+    pyExec("scursor.setPropertyValue('BreakType', 0)") # NONE
   }
   if (numbered) {
-    python.exec("text.insertString(scursor, 'Table ', False)")
+    pyExec("text.insertString(scursor, 'Table ', False)")
     rlo_dispatch(".uno:InsertField", 
       list(Type = 23, SubType = 127, Name = "Tabelle", Content = "", Format = 4, Separator = " "))
-    python.exec("text.insertString(scursor, ': ', False)")
+    pyExec("text.insertString(scursor, ': ', False)")
   }
-  python.assign("captiontext", captiontext)
-  python.exec("text.insertString(scursor, captiontext, False)")
+  pySet("captiontext", captiontext)
+  pyExec("text.insertString(scursor, captiontext, False)")
 
-  python.exec("tbl = doc.createInstance('com.sun.star.text.TextTable')")
+  pyExec("tbl = doc.createInstance('com.sun.star.text.TextTable')")
 
-  if (split) python.exec("tbl.Split = True")
-  else python.exec("tbl.Split = False")
+  if (split) pyExec("tbl.Split = True")
+  else pyExec("tbl.Split = False")
 
   if (header[1] == "colnames") {
     header <- colnames(x)
@@ -107,11 +131,12 @@ rlo_table <- function(x, captiontext,
 
   dimnames(x) <- NULL
 
-  python.exec(paste0("tbl.initialize(", nrow(x), ", ", ncol(x), ")"))
-  python.exec("text.insertTextContent(scursor, tbl, False)")
-  python.assign("x", x)
-  python.exec("x = tuple(tuple(i) for i in x)")
-  python.exec("tbl.setDataArray(x)")
+  x <- ifelse(is.na(x), NA_string, x)
+  pyExec(paste0("tbl.initialize(", nrow(x), ", ", ncol(x), ")"))
+  pyExec("text.insertTextContent(scursor, tbl, False)")
+  pySet("x", x)
+  pyExec("x = tuple(tuple(i) for i in x)")
+  pyExec("tbl.setDataArray(x)")
 
   # Set cell widths
   if (!is.null(widths)) {
@@ -120,16 +145,16 @@ rlo_table <- function(x, captiontext,
     
     separators = round(cumsum(widths) / sum(widths) * 10000)
 
-    python.exec("tcs = tbl.TableColumnSeparators")
+    pyExec("tcs = tbl.TableColumnSeparators")
     for (i in 0:(length(separators) - 2)) {
-      python.exec(paste0("tcs[", i, "].Position = ", separators[i + 1]))
+      pyExec(paste0("tcs[", i, "].Position = ", separators[i + 1]))
     }
-    python.exec("tbl.TableColumnSeparators = tcs")
+    pyExec("tbl.TableColumnSeparators = tcs")
   }
 
   cellrange = paste0("A1:", LETTERS[ncol(x)], nrow(x))
   if (!is.null(charheight)) {
-    python.exec(paste0("tbl.getCellRangeByName('", cellrange, "').CharHeight = ", charheight))
+    pyExec(paste0("tbl.getCellRangeByName('", cellrange, "').CharHeight = ", charheight))
   }
 
   # Merge factor columns if requested
@@ -137,11 +162,11 @@ rlo_table <- function(x, captiontext,
     if (factor_col %in% merge_index) {
       for (ei in seq_along(mergelist[[factor_col]])) {
         entry = mergelist[[factor_col]][[ei]]
-        python.assign("cellname", paste0(factor_col, entry["start"] + n_headrows))
-        python.exec("tcursor = tbl.createCursorByCellName(cellname)")
+        pySet("cellname", paste0(factor_col, entry["start"] + n_headrows))
+        pyExec("tcursor = tbl.createCursorByCellName(cellname)")
         stepsize = entry["end"] - entry["start"]
-        python.exec(paste0("tcursor.goDown(", stepsize, ", True)"))
-        python.exec("tcursor.mergeRange()")
+        pyExec(paste0("tcursor.goDown(", stepsize, ", True)"))
+        pyExec("tcursor.mergeRange()")
       }
     }
   }
@@ -150,31 +175,31 @@ rlo_table <- function(x, captiontext,
   if (!is.null(group_header)) {
     for (factor_index in seq_along(factors)) {
       factor_col = LETTERS[factor_index]    
-      python.assign("cellname", paste0(factor_col, 1))
-      python.exec("tcursor = tbl.createCursorByCellName(cellname)")
-      python.exec(paste0("tcursor.goDown(1, True)"))
-      python.exec("tcursor.mergeRange()")
+      pySet("cellname", paste0(factor_col, 1))
+      pyExec("tcursor = tbl.createCursorByCellName(cellname)")
+      pyExec(paste0("tcursor.goDown(1, True)"))
+      pyExec("tcursor.mergeRange()")
     }
     col_index = length(factors)
     for (group_size in group_sizes) {
       col_index = col_index + 1
-      python.assign("cellname", paste0(LETTERS[col_index], 1))
-      python.exec("tcursor = tbl.createCursorByCellName(cellname)")
-      python.exec(paste0("tcursor.goRight(", group_size - 1, ", True)"))
-      python.exec("tcursor.mergeRange()")
+      pySet("cellname", paste0(LETTERS[col_index], 1))
+      pyExec("tcursor = tbl.createCursorByCellName(cellname)")
+      pyExec(paste0("tcursor.goRight(", group_size - 1, ", True)"))
+      pyExec("tcursor.mergeRange()")
     }
   }
 
   if (is.null(footer)) {
-    python.exec("scursor.setPropertyValue('ParaStyleName', 'Textkörper mit Abstand')")
+    pyExec("scursor.setPropertyValue('ParaStyleName', 'Textkörper mit Abstand')")
   } else {
-    python.exec("scursor.setPropertyValue('ParaStyleName', 'Tabellenunterschrift')")
+    pyExec("scursor.setPropertyValue('ParaStyleName', 'Tabellenunterschrift')")
     if (!is.null(charheight)) {
-      python.exec(paste0("scursor.setPropertyValue('CharHeight', ", charheight, ")"))
+      pyExec(paste0("scursor.setPropertyValue('CharHeight', ", charheight, ")"))
     }
-    python.assign("footer", footer)
-    python.exec("text.insertString(scursor, footer, False)")
-    python.exec("text.insertControlCharacter(scursor, 0, False)")
-    python.exec("scursor.setPropertyValue('ParaStyleName', 'Textkörper mit Abstand')")
+    pySet("footer", footer)
+    pyExec("text.insertString(scursor, footer, False)")
+    pyExec("text.insertControlCharacter(scursor, 0, False)")
+    pyExec("scursor.setPropertyValue('ParaStyleName', 'Textkörper mit Abstand')")
   }
 }
