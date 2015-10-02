@@ -37,8 +37,7 @@ install: build
 	"$(RBIN)/R" CMD INSTALL $(TGZ)
 
 check: build
-	# Vignettes have been rebuilt by the build target
-	"$(RBIN)/R" CMD check --as-cran --no-tests --no-build-vignettes $(TGZ)
+	"$(RBIN)/R" CMD check --no-tests --no-build-vignettes $(TGZ)
 
 clean: 
 	$(RM) -r $(PKGNAME).Rcheck/
