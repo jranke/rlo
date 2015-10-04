@@ -1,5 +1,5 @@
 .onAttach <- function(libname, pkgname) {
-  pyExec("import numpy")
-  pyOptions("useNumpy", TRUE)
-  message("rlo: Importing numpy and setting the PythonInR option useNumpy to TRUE")
+  PythonInR::pyExec("import numpy")
+  PythonInR::pyOptions("useNumpy", TRUE)
+  packageStartupMessage("rlo: Importing numpy and setting the PythonInR option useNumpy to TRUE")
 }

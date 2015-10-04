@@ -2,7 +2,7 @@
 #' 
 #' Inserts a table at the current position of the view cursor.
 #'
-#' @importFrom PythonInR pyExec
+#' @importFrom PythonInR pyExec pySet
 #' @param x A matrix of character vectors to be inserted as a table
 #' @param captiontext The text of the caption
 #' @param header The names to be used for the columns of the matrix
@@ -16,7 +16,7 @@
 #'   which adjacent cells with identical values should be merged 
 #' @param numbered Should the caption of the table be numbered?
 #' @param NA_string The string used for NA values
-#' @param bread_before_caption Should a page break be insersted before the caption
+#' @param break_before_caption Should a page break be insersted before the caption
 #' @param split Should it be allowed to split the table across pages
 #' @param charheight An optional way to specify the character height in table cells
 #' @param widths An optional way to specify relative columns widths

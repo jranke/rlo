@@ -33,13 +33,13 @@ which adjacent cells with identical values should be merged}
 
 \item{NA_string}{The string used for NA values}
 
+\item{break_before_caption}{Should a page break be insersted before the caption}
+
 \item{split}{Should it be allowed to split the table across pages}
 
 \item{charheight}{An optional way to specify the character height in table cells}
 
 \item{widths}{An optional way to specify relative columns widths}
-
-\item{bread_before_caption}{Should a page break be insersted before the caption}
 }
 \description{
 Inserts a table at the current position of the view cursor.

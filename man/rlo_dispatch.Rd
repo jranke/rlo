@@ -6,6 +6,12 @@
 \usage{
 rlo_dispatch(URL, properties)
 }
+\arguments{
+\item{URL}{The URL of the function to be dispatched}
+
+\item{properties}{A list of properties, often difficult to specify because
+of missing documentation}
+}
 \description{
 Function to use the dispatcher to use GUI functions
 }

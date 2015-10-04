@@ -1,6 +1,9 @@
 #' Function to insert a heading
 #'
-#' @importFrom PythonInR pyExec
+#' @importFrom PythonInR pyExec pySet
+#' @param heading The text of the heading
+#' @param level Heading level from 1 to 10
+#' @param break_before Should a page break before be associated with the heading?
 #' @export
 rlo_heading <- function(heading, level = 2, break_before = FALSE) {
   rlo_scursor()

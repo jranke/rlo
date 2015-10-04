@@ -6,6 +6,13 @@
 \usage{
 rlo_heading(heading, level = 2, break_before = FALSE)
 }
+\arguments{
+\item{heading}{The text of the heading}
+
+\item{level}{Heading level from 1 to 10}
+
+\item{break_before}{Should a page break before be associated with the heading?}
+}
 \description{
 Function to insert a heading
 }

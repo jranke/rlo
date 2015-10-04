@@ -5,7 +5,7 @@ Version: 0.2-01
 Date: 2015-10-01
 Authors@R: c(person("Johannes", "Ranke", role = c("aut", "cre", "cph"),
              email = "johannes.ranke@jrwb.de"))
-Description: Utilities for writing to libreoffice documents
+Description: Utilities for writing to libreoffice documents are contained in this package.
 Depends: PythonInR
 License: GPL
 LazyLoad: yes

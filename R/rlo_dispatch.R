@@ -1,6 +1,9 @@
 #' Function to use the dispatcher to use GUI functions
 #'
 #' @importFrom PythonInR pyExec
+#' @param URL The URL of the function to be dispatched
+#' @param properties A list of properties, often difficult to specify because
+#'   of missing documentation
 #' @export
 rlo_dispatch <- function(URL, properties) {
   pyExec(paste0("proplist = [ PropertyValue() for i in range(", length(properties), ") ]"))
