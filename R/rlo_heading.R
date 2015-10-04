@@ -5,7 +5,7 @@
 rlo_heading <- function(heading, level = 2, break_before = FALSE) {
   rlo_scursor()
 
-  pyExec(paste0("scursor.setPropertyValue('ParaStyleName', 'Überschrift ", level, "')"))
+  pyExec(paste0("scursor.setPropertyValue('ParaStyleName', 'Heading ", level, "')"))
   if (break_before) {
     pyExec("scursor.setPropertyValue('BreakType', 4)") # PAGE_BEFORE
   } else {

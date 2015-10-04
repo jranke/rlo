@@ -191,7 +191,7 @@ rlo_table <- function(x, captiontext,
   }
 
   if (is.null(footer)) {
-    pyExec("scursor.setPropertyValue('ParaStyleName', 'Textkörper mit Abstand')")
+    pyExec("scursor.setPropertyValue('ParaStyleName', 'Textk\u00f6rper mit Abstand')")
   } else {
     pyExec("scursor.setPropertyValue('ParaStyleName', 'Tabellenunterschrift')")
     if (!is.null(charheight)) {
@@ -200,6 +200,6 @@ rlo_table <- function(x, captiontext,
     pySet("footer", footer)
     pyExec("text.insertString(scursor, footer, False)")
     pyExec("text.insertControlCharacter(scursor, 0, False)")
-    pyExec("scursor.setPropertyValue('ParaStyleName', 'Textkörper mit Abstand')")
+    pyExec("scursor.setPropertyValue('ParaStyleName', 'Textk\u00f6rper mit Abstand')")
   }
 }
