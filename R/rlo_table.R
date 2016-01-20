@@ -18,6 +18,7 @@
 #' @param NA_string The string used for NA values
 #' @param break_before_caption Should a page break be insersted before the caption
 #' @param split Should it be allowed to split the table across pages
+#' @param repeat_headlines Should the headline(s) be repeated?
 #' @param charheight An optional way to specify the character height in table cells
 #' @param widths An optional way to specify relative columns widths
 #' @export
@@ -31,6 +32,7 @@ rlo_table <- function(x, captiontext,
                       NA_string = "",                      
                       break_before_caption = FALSE,
                       split = FALSE,
+                      repeat_headline = TRUE,
                       charheight = NULL, 
                       widths = NULL)
 {
@@ -137,7 +139,7 @@ rlo_table <- function(x, captiontext,
   pySet("x", x)
   pyExec("x = tuple(tuple(i) for i in x)")
   pyExec("tbl.setDataArray(x)")
-
+  
   # Set cell widths
   if (!is.null(widths)) {
     if (length(widths) > ncol(x)) stop("You specified more cell widths than the number of columns")
@@ -189,6 +191,12 @@ rlo_table <- function(x, captiontext,
       pyExec("tcursor.mergeRange()")
     }
   }
+
+  # Repeat headlines if requested
+  if (repeat_headline) {
+    pyExec(paste0("tbl.setPropertyValue('HeaderRowCount', ", n_headrows, ")"))
+  }
+
 
   if (is.null(footer)) {
     pyExec("scursor.setPropertyValue('ParaStyleName', 'Textk\u00f6rper mit Abstand')")

@@ -1,13 +1,16 @@
 Package: rlo
 Type: Package
 Title: Utilities for writing libreoffice documents
-Version: 0.2-01
-Date: 2015-10-01
+Version: 0.2-02
+Date: 2016-01-20
 Authors@R: c(person("Johannes", "Ranke", role = c("aut", "cre", "cph"),
              email = "johannes.ranke@jrwb.de"))
-Description: Utilities for writing to libreoffice documents are contained in this package.
-Depends: PythonInR
+Description: Utilities for writing to libreoffice documents are contained in
+    this package.
+Depends:
+    PythonInR
 License: GPL
 LazyLoad: yes
 LazyData: yes
 Encoding: UTF-8
+RoxygenNote: 5.0.1
