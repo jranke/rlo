@@ -7,6 +7,7 @@
 #' @param captiontext The text of the caption
 #' @param header The names to be used for the columns of the matrix
 #' @param group_header If not NULL, the names of column groups
+#' @param common_header If not NULL, the common header of all matrix columns
 #' @param group_sizes If group_header is not NULL, a vector holding the sizes of 
 #'   column groups
 #' @param footer An optional text to be included as a table footer
@@ -25,6 +26,7 @@
 rlo_table <- function(x, captiontext, 
                       header = "colnames", 
                       group_header = NULL,
+                      common_header = NULL,
                       group_sizes = NULL,
                       footer = NULL,
                       factors = NULL, merge_index = NULL,
@@ -37,6 +39,8 @@ rlo_table <- function(x, captiontext,
                       widths = NULL)
 {
   rlo_scursor()
+
+  matrix_cols = ncol(x)
 
   pyExec("scursor.setPropertyValue('ParaStyleName', 'Table')")
   pyExec("scursor.setPropertyValue('ParaKeepTogether', True)")
@@ -78,6 +82,10 @@ rlo_table <- function(x, captiontext,
       }
       x <- rbind(group_header_expanded, x)
       n_headrows = 2
+    }
+    if (!is.null(common_header)) {
+      x <- rbind(c(common_header, rep("", matrix_cols - 1)), x)
+      n_headrows = n_headrows + 1
     }
   }
 
@@ -128,12 +136,16 @@ rlo_table <- function(x, captiontext,
       if (n_headrows == 2) {
         x <- cbind(c(names(factors)[i], "", factors[[i]]), x)
       }
+      if (n_headrows == 3) {
+        x <- cbind(c(names(factors)[i], "", "", factors[[i]]), x)
+      }
     }
   }
 
   dimnames(x) <- NULL
 
-  x <- ifelse(is.na(x), NA_string, x)
+  x[is.na(x)] <- NA_string
+
   pyExec(paste0("tbl.initialize(", nrow(x), ", ", ncol(x), ")"))
   pyExec("text.insertTextContent(scursor, tbl, False)")
   pySet("x", x)
@@ -173,23 +185,38 @@ rlo_table <- function(x, captiontext,
     }
   }
 
-  # Merge headers of factor columns (vertically) and group header fields if group header is present
-  if (!is.null(group_header)) {
+  # Merge headers of factor columns (vertically) 
+  if (n_headrows > 1) {
+    factor_merge_step = n_headrows - 1
     for (factor_index in seq_along(factors)) {
       factor_col = LETTERS[factor_index]    
       pySet("cellname", paste0(factor_col, 1))
       pyExec("tcursor = tbl.createCursorByCellName(cellname)")
-      pyExec(paste0("tcursor.goDown(1, True)"))
+      pyExec(paste0("tcursor.goDown(", factor_merge_step, ", True)"))
       pyExec("tcursor.mergeRange()")
     }
+  }
+
+  # Merge group header fields if group header is present
+  if (!is.null(group_header)) {
     col_index = length(factors)
     for (group_size in group_sizes) {
       col_index = col_index + 1
-      pySet("cellname", paste0(LETTERS[col_index], 1))
+      group_header_row_index = if (!is.null(common_header)) 2 else 1
+      pySet("cellname", paste0(LETTERS[col_index], group_header_row_index))
       pyExec("tcursor = tbl.createCursorByCellName(cellname)")
       pyExec(paste0("tcursor.goRight(", group_size - 1, ", True)"))
       pyExec("tcursor.mergeRange()")
     }
+  }
+
+  # Merge common header fields if common header is present
+  if (!is.null(common_header)) {
+    col_index = length(factors) + 1
+    pySet("cellname", paste0(LETTERS[col_index], 1))
+    pyExec("tcursor = tbl.createCursorByCellName(cellname)")
+    pyExec(paste0("tcursor.goRight(", matrix_cols - 1, ", True)"))
+    pyExec("tcursor.mergeRange()")
   }
 
   # Repeat headlines if requested
@@ -197,7 +224,7 @@ rlo_table <- function(x, captiontext,
     pyExec(paste0("tbl.setPropertyValue('HeaderRowCount', ", n_headrows, ")"))
   }
 
-
+  # Set footer
   if (is.null(footer)) {
     pyExec("scursor.setPropertyValue('ParaStyleName', 'Textk\u00f6rper mit Abstand')")
   } else {
