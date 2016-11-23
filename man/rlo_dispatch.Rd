@@ -15,4 +15,7 @@ This is often difficult to specify because of missing documentation}
 \description{
 Use the dispatcher for GUI functions
 }
+\examples{
+\dontrun{rlo_dispatch(".uno:Save")}
+}
 

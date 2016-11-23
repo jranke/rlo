@@ -35,4 +35,4 @@ apt install python-uno
 ```
 
 I have not tried to use this package on operating systems other than Debian
-stable, but I think it should be possible.
+stable, but I think it is possible.

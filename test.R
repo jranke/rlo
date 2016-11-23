@@ -10,7 +10,8 @@ table_data = data.frame(
 
 rlo_table(table_data, "Some people and their age")
 
+rlo_dispatch(".uno:Save")
+
 rlo_quit()
 
-rlo_start("test.odt", overwrite = FALSE)
 rlo_start("test.odt")

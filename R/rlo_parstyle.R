@@ -1,4 +1,4 @@
-#' Apply a paragraph if it exists
+#' Apply a paragraph style if it exists
 #'
 #' @importFrom PythonInR pyExec pyGet
 #' @param parstyle The name of the paragraph style to be applied

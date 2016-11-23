@@ -5,9 +5,13 @@
 #' @param properties If not NULL, a list of properties to specify the call.
 #'   This is often difficult to specify because of missing documentation
 #' @export
+#' @examples
+#' \dontrun{rlo_dispatch(".uno:Save")}
+
 rlo_dispatch <- function(URL, properties = NULL) {
   if (is.null(properties)) {
-    pyExec("proplist = None")
+    pyExec(paste0("dispatcher.executeDispatch(doc.getCurrentController(), '", URL, 
+                  "', '', 0, tuple())"))
   } else {
     pyExec(paste0("proplist = [ PropertyValue() for i in range(", length(properties), ") ]"))
     for (i in 1:length(properties)) {
@@ -18,7 +22,7 @@ rlo_dispatch <- function(URL, properties = NULL) {
         pyExec(paste0("proplist[", i - 1, "].Value = '", properties[[i]], "'"))
       }
     }
+    pyExec(paste0("dispatcher.executeDispatch(doc.getCurrentController(), '", URL, 
+                  "', '', 0, tuple(proplist))"))
   }
-  pyExec(paste0("dispatcher.executeDispatch(doc.getCurrentController(), '",
-                     URL, "', '', 0, tuple(proplist))"))
 }

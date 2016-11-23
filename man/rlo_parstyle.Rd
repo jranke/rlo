@@ -2,7 +2,7 @@
 % Please edit documentation in R/rlo_parstyle.R
 \name{rlo_parstyle}
 \alias{rlo_parstyle}
-\title{Apply a paragraph if it exists}
+\title{Apply a paragraph style if it exists}
 \usage{
 rlo_parstyle(parstyle, warn = TRUE)
 }
@@ -12,6 +12,6 @@ rlo_parstyle(parstyle, warn = TRUE)
 \item{warn}{Should missing paragraph styles give a warning?}
 }
 \description{
-Apply a paragraph if it exists
+Apply a paragraph style if it exists
 }
 
