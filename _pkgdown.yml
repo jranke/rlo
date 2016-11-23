@@ -11,6 +11,7 @@ reference:
   - title: Start or quit LibreOffice Writer
     contents:
       - rlo_start
+      - rlo_new
       - rlo_quit
   - title: Insert content
     contents:
