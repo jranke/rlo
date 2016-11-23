@@ -2,7 +2,7 @@
 % Please edit documentation in R/rlo_table.R
 \name{rlo_table}
 \alias{rlo_table}
-\title{Function to insert a table into the connected document}
+\title{Insert a table into the connected document}
 \usage{
 rlo_table(x, captiontext, header = "colnames", group_header = NULL,
   common_header = NULL, group_sizes = NULL, footer = NULL,

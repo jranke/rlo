@@ -1,4 +1,4 @@
-#' Function to insert a table into the connected document
+#' Insert a table into the connected document
 #'
 #' Inserts a table at the current position of the view cursor.
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/rlo_heading.R
 \name{rlo_heading}
 \alias{rlo_heading}
-\title{Function to insert a heading}
+\title{Insert a heading}
 \usage{
 rlo_heading(heading, level = 2, break_before = FALSE)
 }
@@ -14,6 +14,6 @@ rlo_heading(heading, level = 2, break_before = FALSE)
 \item{break_before}{Should a page break before be associated with the heading?}
 }
 \description{
-Function to insert a heading
+Insert a heading
 }
 

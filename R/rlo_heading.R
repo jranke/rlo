@@ -1,4 +1,4 @@
-#' Function to insert a heading
+#' Insert a heading
 #'
 #' @importFrom PythonInR pyExec pySet
 #' @param heading The text of the heading

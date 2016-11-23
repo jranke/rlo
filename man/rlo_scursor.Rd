@@ -2,11 +2,11 @@
 % Please edit documentation in R/rlo_scursor.R
 \name{rlo_scursor}
 \alias{rlo_scursor}
-\title{Function to get the current view cursor in the active document}
+\title{Get the current view cursor in the active document}
 \usage{
 rlo_scursor()
 }
 \description{
-Function to get the current view cursor in the active document
+Get the current view cursor in the active document
 }
 

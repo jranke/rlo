@@ -2,7 +2,7 @@
 % Please edit documentation in R/rlo_start.R
 \name{rlo_start}
 \alias{rlo_start}
-\title{Function to start libreoffice writer}
+\title{Start libreoffice writer}
 \usage{
 rlo_start(file = NULL, title = NULL, dir = ".", template = NULL,
   open = !is.null(file), overwrite = FALSE, sleep_time = 1)
@@ -24,6 +24,6 @@ rlo_start(file = NULL, title = NULL, dir = ".", template = NULL,
 trying to connect}
 }
 \description{
-Function to start libreoffice writer
+Start libreoffice writer
 }
 

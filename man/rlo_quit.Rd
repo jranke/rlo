@@ -2,7 +2,7 @@
 % Please edit documentation in R/rlo_quit.R
 \name{rlo_quit}
 \alias{rlo_quit}
-\title{Function to quit a libroffice instance}
+\title{Quit a libroffice instance}
 \usage{
 rlo_quit(save = TRUE)
 }
@@ -10,6 +10,6 @@ rlo_quit(save = TRUE)
 \item{save}{Should changes in the current file be saved on closing?}
 }
 \description{
-Function to quit a libroffice instance
+Quit a libroffice instance
 }
 

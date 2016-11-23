@@ -1,4 +1,4 @@
-#' Function to connect to the current LibreOfficeWriter document
+#' Connect to the current LibreOfficeWriter document
 #'
 #' @importFrom PythonInR pyExecfile
 #' @export

@@ -1,4 +1,4 @@
-#' Function to start libreoffice writer
+#' Start libreoffice writer
 #'
 #' @importFrom PythonInR pyExec
 #' @param file The file to create/open

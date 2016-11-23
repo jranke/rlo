@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Insert a heading — rlo_heading • rlo</title>
+<title>Insert an SVG graph into the connected document — rlo_figure • rlo</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -66,23 +66,28 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Insert a heading</h1>
+    <h1>Insert an SVG graph into the connected document</h1>
     </div>
 
     
-    <p>Insert a heading</p>
+    <p>Inserts a figure at the current position of the view cursor.</p>
     
 
-    <pre><span class='fu'>rlo_heading</span>(<span class='no'>heading</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>break_before</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre><span class='fu'>rlo_figure</span>(<span class='no'>svg_file</span>, <span class='no'>caption</span>, <span class='kw'>aspect</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>17</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='no'>aspect</span> *
+  <span class='no'>width</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>heading</dt>
-      <dd>The text of the heading</dd>
-      <dt>level</dt>
-      <dd>Heading level from 1 to 10</dd>
-      <dt>break_before</dt>
-      <dd>Should a page break before be associated with the heading?</dd>
+      <dt>svg_file</dt>
+      <dd>Path to an SVG file</dd>
+      <dt>caption</dt>
+      <dd>The caption to use for the figure</dd>
+      <dt>aspect</dt>
+      <dd>The aspect ratio (height/width) to use</dd>
+      <dt>width</dt>
+      <dd>The width in cm</dd>
+      <dt>height</dt>
+      <dd>The height in cm</dd>
     </dl>
     
 

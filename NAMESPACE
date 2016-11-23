@@ -2,6 +2,7 @@
 
 export(rlo_connect)
 export(rlo_dispatch)
+export(rlo_figure)
 export(rlo_heading)
 export(rlo_new)
 export(rlo_parstyle)

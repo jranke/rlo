@@ -1,3 +1,15 @@
+#' Insert an SVG graph into the connected document
+#'
+#' Inserts a figure at the current position of the view cursor.
+#'
+#' @importFrom PythonInR pyExec pySet
+#' @param svg_file Path to an SVG file
+#' @param caption The caption to use for the figure
+#' @param aspect The aspect ratio (height/width) to use
+#' @param width The width in cm
+#' @param height The height in cm
+#' @export
+
 rlo_figure <- function(svg_file, caption, aspect = 1, width = 17, height = aspect * width)
 {
   rlo_scursor()

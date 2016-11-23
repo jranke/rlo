@@ -1,4 +1,4 @@
-#' Function to quit a libroffice instance
+#' Quit a libroffice instance
 #'
 #' @importFrom PythonInR pyExec
 #' @param save Should changes in the current file be saved on closing?

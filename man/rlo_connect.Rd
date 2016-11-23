@@ -2,11 +2,11 @@
 % Please edit documentation in R/rlo_connect.R
 \name{rlo_connect}
 \alias{rlo_connect}
-\title{Function to connect to the current LibreOfficeWriter document}
+\title{Connect to the current LibreOfficeWriter document}
 \usage{
 rlo_connect()
 }
 \description{
-Function to connect to the current LibreOfficeWriter document
+Connect to the current LibreOfficeWriter document
 }
 
