@@ -1,7 +1,6 @@
 PKGNAME := $(shell sed -n "s/Package: *\([^ ]*\)/\1/p" DESCRIPTION)
 PKGVERS := $(shell sed -n "s/Version: *\([^ ]*\)/\1/p" DESCRIPTION)
-PKGSRC  := $(shell basename $(PWD))
-TGZ     := $(PKGSRC)_$(PKGVERS).tar.gz
+TGZ     := $(PKGNAME)_$(PKGVERS).tar.gz
 
 # Specify the directory holding R binaries. To use an alternate R build (say a
 # pre-prelease version) use `make RBIN=/path/to/other/R/` or `export RBIN=...`
@@ -12,16 +11,13 @@ RBIN ?= $(shell dirname "`which R`")
 
 .PHONY: help
 
-pkgfiles = NEWS \
+pkgfiles = \
 	   DESCRIPTION \
 	   inst/py/connect.py \
 	   NAMESPACE \
 	   R/*
 
-all: NEWS check clean
-
-NEWS: NEWS.md
-	sed -e 's/^-/ -/' -e 's/^## *//' -e 's/^#/\t\t/' <NEWS.md | fmt -80 >NEWS
+all: check clean
 
 $(TGZ): roxygen $(pkgfiles)
 	"$(RBIN)/R" CMD build .
@@ -39,3 +35,8 @@ check: build
 
 clean: 
 	$(RM) -r $(PKGNAME).Rcheck/
+
+pd:
+	"$(RBIN)/Rscript" -e "pkgdown::build_site()"
+	git add -A
+	git commit -m 'Static documentation rebuilt by pkgdown::build_site()' -e

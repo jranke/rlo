@@ -8,6 +8,8 @@ rlo_parstyle(parstyle, warn = TRUE)
 }
 \arguments{
 \item{parstyle}{The name of the paragraph style to be applied}
+
+\item{warn}{Should missing paragraph styles give a warning?}
 }
 \description{
 Apply a paragraph if it exists
