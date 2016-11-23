@@ -2,17 +2,17 @@
 % Please edit documentation in R/rlo_dispatch.R
 \name{rlo_dispatch}
 \alias{rlo_dispatch}
-\title{Function to use the dispatcher to use GUI functions}
+\title{Use the dispatcher for GUI functions}
 \usage{
-rlo_dispatch(URL, properties)
+rlo_dispatch(URL, properties = NULL)
 }
 \arguments{
 \item{URL}{The URL of the function to be dispatched}
 
-\item{properties}{A list of properties, often difficult to specify because
-of missing documentation}
+\item{properties}{If not NULL, a list of properties to specify the call.
+This is often difficult to specify because of missing documentation}
 }
 \description{
-Function to use the dispatcher to use GUI functions
+Use the dispatcher for GUI functions
 }
 

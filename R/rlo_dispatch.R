@@ -1,18 +1,22 @@
-#' Function to use the dispatcher to use GUI functions
+#' Use the dispatcher for GUI functions
 #'
 #' @importFrom PythonInR pyExec
 #' @param URL The URL of the function to be dispatched
-#' @param properties A list of properties, often difficult to specify because
-#'   of missing documentation
+#' @param properties If not NULL, a list of properties to specify the call.
+#'   This is often difficult to specify because of missing documentation
 #' @export
-rlo_dispatch <- function(URL, properties) {
-  pyExec(paste0("proplist = [ PropertyValue() for i in range(", length(properties), ") ]"))
-  for (i in 1:length(properties)) {
-    pyExec(paste0("proplist[", i - 1, "].Name = '", names(properties)[i], "'"))
-    if (is.numeric(properties[[i]])) {
-      pyExec(paste0("proplist[", i - 1, "].Value = ", properties[[i]]))
-    } else {
-      pyExec(paste0("proplist[", i - 1, "].Value = '", properties[[i]], "'"))
+rlo_dispatch <- function(URL, properties = NULL) {
+  if (is.null(properties)) {
+    pyExec("proplist = None")
+  } else {
+    pyExec(paste0("proplist = [ PropertyValue() for i in range(", length(properties), ") ]"))
+    for (i in 1:length(properties)) {
+      pyExec(paste0("proplist[", i - 1, "].Name = '", names(properties)[i], "'"))
+      if (is.numeric(properties[[i]])) {
+        pyExec(paste0("proplist[", i - 1, "].Value = ", properties[[i]]))
+      } else {
+        pyExec(paste0("proplist[", i - 1, "].Value = '", properties[[i]], "'"))
+      }
     }
   }
   pyExec(paste0("dispatcher.executeDispatch(doc.getCurrentController(), '",

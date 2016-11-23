@@ -3,7 +3,8 @@
 #' Inserts a table at the current position of the view cursor.
 #'
 #' @importFrom PythonInR pyExec pySet
-#' @param x A matrix of character vectors to be inserted as a table
+#' @param x A matrix of character vectors to be inserted as a table. If not a matrix,
+#'   an attempt is made to turn it into a matrix by \code{\link{as.matrix}}.
 #' @param captiontext The text of the caption
 #' @param header The names to be used for the columns of the matrix
 #' @param group_header If not NULL, the names of column groups
@@ -22,6 +23,7 @@
 #' @param repeat_headlines Should the headline(s) be repeated?
 #' @param charheight An optional way to specify the character height in table cells
 #' @param widths An optional way to specify relative columns widths
+#' @param warn Should missing paragraph styles give a warning?
 #' @export
 rlo_table <- function(x, captiontext,
                       header = "colnames",
@@ -36,10 +38,12 @@ rlo_table <- function(x, captiontext,
                       split = FALSE,
                       repeat_headlines = TRUE,
                       charheight = NULL,
-                      widths = NULL)
+                      widths = NULL,
+                      warn = FALSE)
 {
   rlo_scursor()
 
+  if (!inherits(x, "matrix")) x <- as.matrix(x)
   matrix_cols = ncol(x)
 
   pyExec("scursor.setPropertyValue('ParaStyleName', 'Table')")
@@ -226,15 +230,15 @@ rlo_table <- function(x, captiontext,
 
   # Set footer
   if (is.null(footer)) {
-    pyExec("scursor.setPropertyValue('ParaStyleName', 'Textk\u00f6rper mit Abstand')")
+    rlo_parstyle('Textk\u00f6rper mit Abstand', warn = warn)
   } else {
-    pyExec("scursor.setPropertyValue('ParaStyleName', 'Tabellenunterschrift')")
+    rlo_parstyle('Tabellenunterschrift', warn = warn)
     if (!is.null(charheight)) {
       pyExec(paste0("scursor.setPropertyValue('CharHeight', ", charheight, ")"))
     }
     pySet("footer", footer)
     pyExec("text.insertString(scursor, footer, False)")
     pyExec("text.insertControlCharacter(scursor, 0, False)")
-    pyExec("scursor.setPropertyValue('ParaStyleName', 'Textk\u00f6rper mit Abstand')")
+    rlo_parstyle('Textk\u00f6rper mit Abstand', warn = warn)
   }
 }

@@ -8,10 +8,11 @@ rlo_table(x, captiontext, header = "colnames", group_header = NULL,
   common_header = NULL, group_sizes = NULL, footer = NULL,
   factors = NULL, merge_index = NULL, numbered = TRUE, NA_string = "",
   break_before_caption = FALSE, split = FALSE, repeat_headlines = TRUE,
-  charheight = NULL, widths = NULL)
+  charheight = NULL, widths = NULL, warn = FALSE)
 }
 \arguments{
-\item{x}{A matrix of character vectors to be inserted as a table}
+\item{x}{A matrix of character vectors to be inserted as a table. If not a matrix,
+an attempt is made to turn it into a matrix by \code{\link{as.matrix}}.}
 
 \item{captiontext}{The text of the caption}
 
@@ -45,6 +46,8 @@ which adjacent cells with identical values should be merged}
 \item{charheight}{An optional way to specify the character height in table cells}
 
 \item{widths}{An optional way to specify relative columns widths}
+
+\item{warn}{Should missing paragraph styles give a warning?}
 }
 \description{
 Inserts a table at the current position of the view cursor.
