@@ -37,3 +37,7 @@ apt install python-uno
 
 I have not tried to use this package on operating systems other than Debian
 stable, but I think it is possible.
+
+## Documentation
+
+Static documentation can be found on [github.io](https://jranke.github.io/rlo).
