@@ -1,0 +1,25 @@
+title: rlo
+
+template:
+  bootswatch: spacelab
+
+reference:
+  - title: Connect to LibreOffice Writer
+    contents:
+      - rlo_connect
+      - rlo_scursor
+  - title: Start or quit LibreOffice Writer
+    contents:
+      - rlo_start
+      - rlo_quit
+  - title: Insert content
+    contents:
+      - rlo_heading
+      - rlo_table
+      - rlo_figure
+  - title: Formatting
+    contents:
+      - rlo_parstyle
+  - title: Use LibreOffice GUI functions
+    contents:
+      - rlo_dispatch
