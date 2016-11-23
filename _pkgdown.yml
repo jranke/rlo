@@ -24,3 +24,4 @@ reference:
   - title: Use LibreOffice GUI functions
     contents:
       - rlo_dispatch
+      - rlo_pdf

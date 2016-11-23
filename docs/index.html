@@ -35,10 +35,11 @@
 
 <span class="kw"><a href="reference/rlo_heading.html">rlo_heading</a></span>(<span class="st">"Example heading"</span>, <span class="dv">1</span>)
 table_data =<span class="st"> </span><span class="kw">data.frame</span>(
-  <span class="dt">Name =</span> <span class="kw">c</span>(<span class="st">"Jane"</span>, <span class="st">"Bj&ouml;rn"</span>),
-  <span class="dt">Age =</span> <span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">33</span>))
+  <span class="dt">City =</span> <span class="kw">c</span>(<span class="st">"M&uuml;nchen"</span>, <span class="st">"Berlin"</span>),
+  <span class="st">"Elevation</span><span class="ch">\n</span><span class="st">[m]"</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">520</span>, <span class="dv">34</span>),
+  <span class="dt">check.names =</span> <span class="ot">FALSE</span>)
 
-<span class="kw"><a href="reference/rlo_table.html">rlo_table</a></span>(table_data, <span class="st">"Some people and their age"</span>)
+<span class="kw"><a href="reference/rlo_table.html">rlo_table</a></span>(table_data, <span class="st">"Two major cities in Germany"</span>)
 
 <span class="kw"><a href="reference/rlo_quit.html">rlo_quit</a></span>()</code></pre></div>
 <div id="prerequisites" class="section level2">
@@ -46,7 +47,7 @@ table_data =<span class="st"> </span><span class="kw">data.frame</span>(
 <a href="#prerequisites" class="anchor"> </a>Prerequisites</h2>
 <p><code>rlo</code> depends on the R package <code>PythonInR</code> and the python bindings of libreoffice called <code>Python UNO</code>. The <code>PythonInR</code> package can be installed from CRAN. On Debian and possibly on derived distributions, installing <code>Python UNO</code> should be as easy as</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">apt</span> install python-uno</code></pre></div>
-<p>I have not tried to use this package on operating systems other than Debian stable, but I think it should be possible.</p>
+<p>I have not tried to use this package on operating systems other than Debian stable, but I think it is possible.</p>
 </div>
 </div>
   </div>

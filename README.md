@@ -16,10 +16,11 @@ rlo_start(file = "test.odt", overwrite = TRUE)
 
 rlo_heading("Example heading", 1)
 table_data = data.frame(
-  Name = c("Jane", "Björn"),
-  Age = c(25, 33))
+  City = c("München", "Berlin"),
+  "Elevation\n[m]" = c(520, 34),
+  check.names = FALSE)
 
-rlo_table(table_data, "Some people and their age")
+rlo_table(table_data, "Two major cities in Germany")
 
 rlo_quit()
 ```
