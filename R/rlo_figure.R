@@ -16,7 +16,7 @@ rlo_figure <- function(svg_file, caption, aspect = 1, width = 17, height = aspec
   pyExec("scursor.setPropertyValue('ParaStyleName', 'Figure')")
   pyExec("text.insertString(scursor, 'Figure ', False)")
 
-  rlo_dispatch(".uno:InsertField", 
+  rlo_dispatch(".uno:InsertField",
     list(Type = 23, SubType = 127, Name = "Figure", Content = "", Format = 4, Separator = " "))
   pyExec("text.insertString(scursor, ': ', False)")
   pySet("captiontext", caption)

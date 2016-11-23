@@ -1,4 +1,4 @@
-#' Function to start a new jrwb report
+#' Function to start a new document
 #'
 #' @importFrom PythonInR pyExec
 #' @param file The file to create
@@ -34,7 +34,7 @@ rlo_start <- function(file = NULL,
     } else {
       stop("Template not readable")
     }
-  } 
+  }
 
   # Start libreoffice
   system(command, wait = FALSE)

@@ -1,5 +1,5 @@
 #' Function to insert a table into the connected document
-#' 
+#'
 #' Inserts a table at the current position of the view cursor.
 #'
 #' @importFrom PythonInR pyExec pySet
@@ -8,13 +8,13 @@
 #' @param header The names to be used for the columns of the matrix
 #' @param group_header If not NULL, the names of column groups
 #' @param common_header If not NULL, the common header of all matrix columns
-#' @param group_sizes If group_header is not NULL, a vector holding the sizes of 
+#' @param group_sizes If group_header is not NULL, a vector holding the sizes of
 #'   column groups
 #' @param footer An optional text to be included as a table footer
 #' @param factors An optional named list of character vectors that must describe the
 #'   rows of the matrix object
 #' @param merge_index An optional character vector with the names of the factors for
-#'   which adjacent cells with identical values should be merged 
+#'   which adjacent cells with identical values should be merged
 #' @param numbered Should the caption of the table be numbered?
 #' @param NA_string The string used for NA values
 #' @param break_before_caption Should a page break be insersted before the caption
@@ -23,19 +23,19 @@
 #' @param charheight An optional way to specify the character height in table cells
 #' @param widths An optional way to specify relative columns widths
 #' @export
-rlo_table <- function(x, captiontext, 
-                      header = "colnames", 
+rlo_table <- function(x, captiontext,
+                      header = "colnames",
                       group_header = NULL,
                       common_header = NULL,
                       group_sizes = NULL,
                       footer = NULL,
                       factors = NULL, merge_index = NULL,
                       numbered = TRUE,
-                      NA_string = "",                      
+                      NA_string = "",
                       break_before_caption = FALSE,
                       split = FALSE,
                       repeat_headline = TRUE,
-                      charheight = NULL, 
+                      charheight = NULL,
                       widths = NULL)
 {
   rlo_scursor()
@@ -51,7 +51,7 @@ rlo_table <- function(x, captiontext,
   }
   if (numbered) {
     pyExec("text.insertString(scursor, 'Table ', False)")
-    rlo_dispatch(".uno:InsertField", 
+    rlo_dispatch(".uno:InsertField",
       list(Type = 23, SubType = 127, Name = "Tabelle", Content = "", Format = 4, Separator = " "))
     pyExec("text.insertString(scursor, ': ', False)")
   }
@@ -151,12 +151,12 @@ rlo_table <- function(x, captiontext,
   pySet("x", x)
   pyExec("x = tuple(tuple(i) for i in x)")
   pyExec("tbl.setDataArray(x)")
-  
+
   # Set cell widths
   if (!is.null(widths)) {
     if (length(widths) > ncol(x)) stop("You specified more cell widths than the number of columns")
     if (length(widths) < ncol(x)) widths = c(widths, rep(1, ncol(x) - length(widths)))
-    
+
     separators = round(cumsum(widths) / sum(widths) * 10000)
 
     pyExec("tcs = tbl.TableColumnSeparators")
@@ -185,11 +185,11 @@ rlo_table <- function(x, captiontext,
     }
   }
 
-  # Merge headers of factor columns (vertically) 
+  # Merge headers of factor columns (vertically)
   if (n_headrows > 1) {
     factor_merge_step = n_headrows - 1
     for (factor_index in seq_along(factors)) {
-      factor_col = LETTERS[factor_index]    
+      factor_col = LETTERS[factor_index]
       pySet("cellname", paste0(factor_col, 1))
       pyExec("tcursor = tbl.createCursorByCellName(cellname)")
       pyExec(paste0("tcursor.goDown(", factor_merge_step, ", True)"))

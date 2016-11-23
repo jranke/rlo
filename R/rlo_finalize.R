@@ -5,5 +5,5 @@
 #' @importFrom PythonInR pyExec
 rlo_finalize <- function()
 {
-  rlo_dispatch(".uno:UpdateAll") 
+  rlo_dispatch(".uno:UpdateAll")
 }
