@@ -2,7 +2,7 @@
 % Please edit documentation in R/rlo_start.R
 \name{rlo_start}
 \alias{rlo_start}
-\title{Function to start a new jrwb report}
+\title{Function to start a new document}
 \usage{
 rlo_start(file = NULL, title = NULL, template = NULL, overwrite = FALSE,
   sleep_time = 3)
@@ -20,6 +20,6 @@ rlo_start(file = NULL, title = NULL, template = NULL, overwrite = FALSE,
 trying to connect}
 }
 \description{
-Function to start a new jrwb report
+Function to start a new document
 }
 
