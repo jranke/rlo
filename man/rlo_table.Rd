@@ -5,10 +5,10 @@
 \title{Function to insert a table into the connected document}
 \usage{
 rlo_table(x, captiontext, header = "colnames", group_header = NULL,
-  group_sizes = NULL, footer = NULL, factors = NULL, merge_index = NULL,
-  numbered = TRUE, NA_string = "", break_before_caption = FALSE,
-  split = FALSE, repeat_headline = TRUE, charheight = NULL,
-  widths = NULL)
+  common_header = NULL, group_sizes = NULL, footer = NULL,
+  factors = NULL, merge_index = NULL, numbered = TRUE, NA_string = "",
+  break_before_caption = FALSE, split = FALSE, repeat_headlines = TRUE,
+  charheight = NULL, widths = NULL)
 }
 \arguments{
 \item{x}{A matrix of character vectors to be inserted as a table}
@@ -19,7 +19,9 @@ rlo_table(x, captiontext, header = "colnames", group_header = NULL,
 
 \item{group_header}{If not NULL, the names of column groups}
 
-\item{group_sizes}{If group_header is not NULL, a vector holding the sizes of 
+\item{common_header}{If not NULL, the common header of all matrix columns}
+
+\item{group_sizes}{If group_header is not NULL, a vector holding the sizes of
 column groups}
 
 \item{footer}{An optional text to be included as a table footer}
@@ -38,11 +40,11 @@ which adjacent cells with identical values should be merged}
 
 \item{split}{Should it be allowed to split the table across pages}
 
+\item{repeat_headlines}{Should the headline(s) be repeated?}
+
 \item{charheight}{An optional way to specify the character height in table cells}
 
 \item{widths}{An optional way to specify relative columns widths}
-
-\item{repeat_headlines}{Should the headline(s) be repeated?}
 }
 \description{
 Inserts a table at the current position of the view cursor.

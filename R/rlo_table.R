@@ -34,7 +34,7 @@ rlo_table <- function(x, captiontext,
                       NA_string = "",
                       break_before_caption = FALSE,
                       split = FALSE,
-                      repeat_headline = TRUE,
+                      repeat_headlines = TRUE,
                       charheight = NULL,
                       widths = NULL)
 {
@@ -220,7 +220,7 @@ rlo_table <- function(x, captiontext,
   }
 
   # Repeat headlines if requested
-  if (repeat_headline) {
+  if (repeat_headlines) {
     pyExec(paste0("tbl.setPropertyValue('HeaderRowCount', ", n_headrows, ")"))
   }
 
