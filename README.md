@@ -27,17 +27,28 @@ rlo_quit()
 
 ## Prerequisites
 
-`rlo` depends on the R package `PythonInR` and the python bindings of libreoffice called `Python UNO`.
-The `PythonInR` package can be installed from CRAN. On Debian and possibly on derived distributions,
-installing `Python UNO` should be as easy as
+`rlo` depends on the R package `PythonInR` and the python bindings of
+libreoffice called the Python-UNO bridge.
+
+### PythonInR
+
+The `PythonInR` package can be installed from CRAN or from the
+[https://bitbucket.org/Floooo/pythoninr/](bitbucket repo), where you can also
+find instructions for installation and setup.
+
+### Python-UNO bridge
+
+On Debian and possibly on derived distributions, installing `Python UNO` can be
+as easy as
 
 ```bash
 apt install python-uno
 ```
 
-I have not tried to use this package on operating systems other than Debian
-stable, but I think it is possible.
+I have tried to use this package on Windows 7, with Libreoffice 5, with limited
+success. There is some code showing what I did in the windows branch of this
+repository.
 
 ## Documentation
 
-Static documentation can be found on [github.io](https://jranke.github.io/rlo).
+An online version of the package documentation can be found on [github.io](https://jranke.github.io/rlo).
