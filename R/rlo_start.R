@@ -16,7 +16,8 @@ rlo_start <- function(file = NULL, title = NULL,
                       sleep_time = 1)
 {
   # Start libreoffice listening to port 8100 on localhost
-  command = "libreoffice --accept='socket,host=localhost,port=8100;urp;'"
+  # Use 'soffice' as that is how the executable is called on windows
+  command = "soffice --accept='socket,host=localhost,port=8100;urp;'"
 
   if (!is.null(file)) {
     if (open) {
