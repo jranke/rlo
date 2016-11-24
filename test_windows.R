@@ -25,8 +25,20 @@ PythonInR:::pyConnectWinDll(
   pyArch = "32bit")
 
 library(PythonInR)
-
 pyExec("import uno")
+
+# Alternatively, connect to a python installation with numpy
+# user_path = "c:/users/USER/appdata/local/programs/python/python35-32"
+# PythonInR:::pyConnectWinDll(
+#   dllName = "python35.dll",
+#   dllDir = user_path,
+#   majorVersion = 3,
+#   pythonHome = user_path,
+#   pyArch = "32bit")
+# library(PythonInR)
+# pyExec("import numpy")
+# # but then importing the uno module hangs, it seems not to be compatible
+# pyExec("import uno")
 
 # I am using a shortcut with the following code
 shortcut = '"E:\\Program Files\\LibreOffice 5\\program\\soffice.exe" "-accept=socket,host=localhost,port=8100;urp;"'
@@ -48,28 +60,9 @@ library(rlo)
 
 rlo_heading("test")
 
-# The following does not work because I can not start libreoffice from R in the
-# right way
-#rlo_new("test.odt", overwrite = TRUE)
-
 rlo_heading("Yet another example heading", 1)
 
-table_data = data.frame(
-  City = c("München", "Berlin"),
-  "Elevation\n[m]" = c(520, 34),
-  check.names = FALSE)
-
-# Does not work because numpy is not available in the python
-# coming with libreoffice
-#rlo_table(table_data, "Two major cities in Germany")
-
-# The following do work also under windows \o/
 rlo_dispatch(".uno:Save")
 rlo_pdf()
-# rlo_pdf("test2.pdf") # Does not work
-unlink("test2.pdf")
 
 rlo_quit()
-
-#rlo_start("test.odt")
-browseURL("test.pdf")
