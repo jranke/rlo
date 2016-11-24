@@ -1,8 +1,8 @@
 lo_path = "E:/Program Files/LibreOffice 5/program"
 lo_py = file.path(lo_path, "python.exe")
 
-# We need to have 'soffice' in the path
-# And we to manually set UNO environment variables
+# We need to have 'soffice' in the path and we need to set environment
+# variables necessary for the Python-UNO bridge
 # This is ported to R and adapted to LibreOffice 5 from 
 # http://sg.linuxtreff.ch/2012/libreoffice-dokumente-mit-python-generieren/
 uno_env <- system2(lo_py, "get_uno_env.py", stdout = TRUE)
