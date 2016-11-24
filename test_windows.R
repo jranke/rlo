@@ -1,7 +1,6 @@
 lo_path = "E:/Program Files/LibreOffice 5/program"
 lo_py = file.path(lo_path, "python.exe")
 
-
 # We need to have 'soffice' in the path
 # And we to manually set UNO environment variables
 # This is ported to R and adapted to LibreOffice 5 from 
@@ -9,19 +8,21 @@ lo_py = file.path(lo_path, "python.exe")
 uno_env <- system2(lo_py, "get_uno_env.py", stdout = TRUE)
 
 # Set environment variables for python interpreter
-#Sys.setenv(URE_BOOTSTRAP=gsub("vnd.sun.star.pathname:", "", uno_env[1]))
 Sys.setenv(URE_BOOTSTRAP=uno_env[1])
 Sys.setenv(UNO_PATH=uno_env[2])
 Sys.setenv(PATH=uno_env[3])
 
 # To get the uno module onto the path
 Sys.setenv(PYTHONPATH=lo_path)
+
+# Then connect (do not set PYTHON_EXE in .Rprofile or .Renviron,
+# this is not flexible enough)
 PythonInR:::pyConnectWinDll(
-  "python33.dll",
-  lo_path,
-  3,
-  paste0(lo_path, "/python-core-3.3.0"),
-  "32bit")
+  dllName = "python33.dll",
+  dllDir = lo_path,
+  majorVersion = 3,
+  pythonHome = paste0(lo_path, "/python-core-3.3.0"),
+  pyArch = "32bit")
 
 library(PythonInR)
 
@@ -29,20 +30,19 @@ pyExec("import uno")
 
 # I am using a shortcut with the following code
 shortcut = '"E:\\Program Files\\LibreOffice 5\\program\\soffice.exe" "-accept=socket,host=localhost,port=8100;urp;"'
+# But when I call it using "system", LO is not visible and I cannot connect to
+# it. 
 #system(shortcut)
-# But when I call it as above, LO is not visible and I cannot connect to it. 
 
-# When I have started LO like this, I can do
+# When I have started LO using the shortcut, I can do
 command = "soffice test.odt"
 system(command, wait = FALSE)
-# to open an odt document
+# to open an odt document if soffice is in the PATH (see above)
 
-# When I click the shortcut, it is visible and I can connect:
+# The GUI is visible and I can connect:
 pyExecfile(system.file("py/connect.py", package = "rlo"))
- 
 
-# and then, finally, I can use the part of my library that does not
-# depend on numpy
+# so I can use the part of my library that does not depend on numpy
 
 library(rlo)
 
