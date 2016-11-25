@@ -1,12 +1,12 @@
 Package: rlo
 Type: Package
-Title: Utilities for writing to libreoffice writer documents
+Title: Utilities for writing to 'libreoffice writer' documents
 Version: 0.3.1
 Date: 2016-11-25
 Authors@R: c(person("Johannes", "Ranke", role = c("aut", "cre", "cph"),
              email = "johannes.ranke@jrwb.de"))
-Description: Utilities for writing to libreoffice writer documents using the
-    Python-UNO bridge.  
+Description: Utilities for writing to 'libreoffice' writer documents using the
+    'Python-UNO' bridge.  
 Depends:
     PythonInR
 SystemRequirements: libreoffice, python-uno

@@ -1,2 +1,9 @@
+^GNUmakefile$
 ^test.R$
+^test_windows.R$
 ^test.odt$
+^test.pdf$
+^rlo.Rcheck
+^rlo_.*\.tar\.gz
+^docs/*
+^_pkgdown.yml$
