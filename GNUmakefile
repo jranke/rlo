@@ -31,7 +31,7 @@ install: build
 	"$(RBIN)/R" CMD INSTALL $(TGZ)
 
 check: build
-	"$(RBIN)/R" CMD check --no-tests --no-build-vignettes $(TGZ)
+	"$(RBIN)/R" CMD check --as-cran $(TGZ)
 
 clean: 
 	$(RM) -r $(PKGNAME).Rcheck/
