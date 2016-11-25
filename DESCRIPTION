@@ -1,15 +1,19 @@
 Package: rlo
 Type: Package
-Title: Utilities for writing to libreoffice documents
+Title: Utilities for writing to libreoffice writer documents
 Version: 0.3.1
 Date: 2016-11-23
 Authors@R: c(person("Johannes", "Ranke", role = c("aut", "cre", "cph"),
              email = "johannes.ranke@jrwb.de"))
-Description: Utilities for writing to libreoffice documents.
+Description: Utilities for writing to libreoffice writer documents using the
+    Python-UNO bridge.  
 Depends:
     PythonInR
+SystemRequirements: libreoffice, python-uno
+URL: https://jranke.github.io/rlo
+BugReports: https://github.com/jranke/rlo/issues
 License: GPL
 LazyLoad: yes
 LazyData: yes
 Encoding: UTF-8
-RoxygenNote: 5.0.1.9000
+RoxygenNote: 5.0.1

@@ -13,7 +13,7 @@
 rlo_start <- function(file = NULL, title = NULL,
                       dir = ".", template = NULL,
                       open = !is.null(file), overwrite = FALSE,
-                      sleep_time = 1)
+                      sleep_time = 2)
 {
   # Start libreoffice listening to port 8100 on localhost
   # Use 'soffice' as that is how the executable is called on windows
@@ -71,7 +71,7 @@ rlo_start <- function(file = NULL, title = NULL,
 #' @inheritParams rlo_start
 #' @export
 rlo_new <- function(file, title = NULL, dir = ".", template = NULL,
-        overwrite = FALSE, sleep_time = 1)
+        overwrite = FALSE, sleep_time = 2)
 {
   rlo_start(file = file, title = title,
             dir = dir, template = template,

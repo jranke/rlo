@@ -1,6 +1,6 @@
 library(rlo)
 
-rlo_new("test.odt", overwrite = TRUE)
+rlo_new("test.odt", overwrite = TRUE, sleep_time = 2)
 
 rlo_heading("Yet another example heading", 1)
 
