@@ -15,6 +15,10 @@ rlo_start <- function(file = NULL, title = NULL,
                       open = !is.null(file), overwrite = FALSE,
                       sleep_time = 2)
 {
+  if (.Platform$OS.type == "windows") {
+    stop("Consider using a shortcut including \"-accept=socket,host=localhost,port=8100;urp;\"",
+      "to start LibreOffice on Windows")
+  }
   # Start libreoffice listening to port 8100 on localhost
   command = "libreoffice --accept='socket,host=localhost,port=8100;urp;'"
 
