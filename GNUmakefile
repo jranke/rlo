@@ -40,3 +40,10 @@ pd:
 	"$(RBIN)/Rscript" -e "pkgdown::build_site()"
 	git add -A
 	git commit -m 'Static documentation rebuilt by pkgdown::build_site()' -e
+
+winbuilder: build
+	date
+	@echo "Uploading to R-release on win-builder"
+	curl -T $(TGZ) ftp://anonymous@win-builder.r-project.org/R-release/
+	@echo "Uploading to R-devel on win-builder"
+	curl -T $(TGZ) ftp://anonymous@win-builder.r-project.org/R-devel/
