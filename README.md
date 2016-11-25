@@ -7,8 +7,8 @@ This is useful for useRs that appreciate the functionality of the libreoffice
 writer for writing documents, but would like to be able to insert results from
 R calculations.
 
-However, it is also possible to start, populate and save libreoffice documents
-without even touching the GUI:
+However, on Linux it is also possible to start, populate and save libreoffice
+documents without even touching the GUI:
 
 ```r
 library(rlo)
@@ -47,7 +47,7 @@ apt install python-uno
 
 You may also find that it is possible to use this package on Windows, with the
 limitation that I did not find a way to start LibreOffice from R. Therefore,
-the functions `rlo_start` and `rlo_new` do not do anything on windows.
+the functions `rlo_start` and `rlo_new` give an error on windows.
 
 As `rlo` uses `PythonInR` with the option to use numpy (`pyOption(useNumpy=TRUE)`),
 I installed WinPython in a version matching the minor release version of the Python
