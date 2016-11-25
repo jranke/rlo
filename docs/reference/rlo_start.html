@@ -70,11 +70,18 @@
     </div>
 
     
-    <p>Start libreoffice writer</p>
+    <p>This functions starts libreoffice, if it is in the PATH on POSIX systems
+(tested only on Linux). On Windows, consider using a shortcut 
+including &#8220;-accept=socket,host=localhost,port=8100;urp;&#8221;.</p>
+
+    <p>Create a new libreoffice writer document</p>
     
 
     <pre><span class='fu'>rlo_start</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>template</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>open</span> <span class='kw'>=</span> !<span class='fu'>is.null</span>(<span class='no'>file</span>), <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sleep_time</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+  <span class='kw'>open</span> <span class='kw'>=</span> !<span class='fu'>is.null</span>(<span class='no'>file</span>), <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sleep_time</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+
+<span class='fu'>rlo_new</span>(<span class='no'>file</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>template</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sleep_time</span> <span class='kw'>=</span> <span class='fl'>2</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
