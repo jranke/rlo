@@ -1,5 +1,9 @@
 #' Start libreoffice writer
 #'
+#' This functions starts libreoffice, if it is in the PATH on POSIX systems
+#' (tested only on Linux). On Windows, consider using a shortcut 
+#' including \dQuote{-accept=socket,host=localhost,port=8100;urp;}.
+#'
 #' @importFrom PythonInR pyExec
 #' @param file The file to create/open
 #' @param title The title of the document
@@ -71,8 +75,9 @@ rlo_start <- function(file = NULL, title = NULL,
 }
 
 #' Create a new libreoffice writer document
-#'
+#' 
 #' @inheritParams rlo_start
+#' @rdname rlo_start
 #' @export
 rlo_new <- function(file, title = NULL, dir = ".", template = NULL,
         overwrite = FALSE, sleep_time = 2)

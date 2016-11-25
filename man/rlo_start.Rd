@@ -2,10 +2,14 @@
 % Please edit documentation in R/rlo_start.R
 \name{rlo_start}
 \alias{rlo_start}
+\alias{rlo_new}
 \title{Start libreoffice writer}
 \usage{
 rlo_start(file = NULL, title = NULL, dir = ".", template = NULL,
-  open = !is.null(file), overwrite = FALSE, sleep_time = 1)
+  open = !is.null(file), overwrite = FALSE, sleep_time = 2)
+
+rlo_new(file, title = NULL, dir = ".", template = NULL,
+  overwrite = FALSE, sleep_time = 2)
 }
 \arguments{
 \item{file}{The file to create/open}
@@ -24,6 +28,10 @@ rlo_start(file = NULL, title = NULL, dir = ".", template = NULL,
 trying to connect}
 }
 \description{
-Start libreoffice writer
+This functions starts libreoffice, if it is in the PATH on POSIX systems
+(tested only on Linux). On Windows, consider using a shortcut 
+including \dQuote{-accept=socket,host=localhost,port=8100;urp;}.
+
+Create a new libreoffice writer document
 }
 
