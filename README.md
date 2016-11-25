@@ -25,25 +25,32 @@ rlo_table(table_data, "Two major cities in Germany")
 rlo_quit()
 ```
 
-## Prerequisites
-
 `rlo` depends on the R package `PythonInR` and the python bindings of
 libreoffice called the Python-UNO bridge.
 
-### PythonInR
+## PythonInR
 
 The `PythonInR` package can be installed from CRAN or from the
 [https://bitbucket.org/Floooo/pythoninr/](bitbucket repo), where you can also
 find instructions for installation and setup.
 
-### Python-UNO bridge
+## Python-UNO bridge
 
-On Debian and possibly on derived distributions, installing `Python UNO` can be
-as easy as
+The Python-UNO bridge has to be available in the Python installation that
+`PythonInR` connects to.
+
+### Linux
+
+On Debian and possibly on derived distributions, setting up the Python-UNO
+bridge can be as easy as
 
 ```bash
 apt install python-uno
 ```
+
+Alternatively, you may want `python3-uno` if you are using Python 3.
+
+### Windows
 
 You may also find that it is possible to use this package on Windows, with the
 limitation that I did not find a way to start LibreOffice from R. Therefore,
@@ -60,11 +67,11 @@ After installing this, I had success using the following code in my `.Rprofile`:
 ```r
 # We need to have 'soffice' in the path and we need to set environment
 # variables necessary for the Python-UNO bridge
-# This is ported to R and adapted to LibreOffice 5 from 
+# This is ported to R and adapted to LibreOffice 5 from
 # http://sg.linuxtreff.ch/2012/libreoffice-dokumente-mit-python-generieren/
 lo_path = "E:/Program Files/LibreOffice 5/program"
 lo_py = file.path(lo_path, "python.exe")
-uno_env <- system2(lo_py, 
+uno_env <- system2(lo_py,
   shQuote(system.file("py/get_uno_env.py", package = "rlo")),
   stdout = TRUE)
 
