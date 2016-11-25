@@ -1,5 +1,7 @@
 # rlo
 
+[![](http://www.r-pkg.org/badges/version/rlo)](https://cran.r-project.org/package=rlo)
+
 The R package `rlo` uses the UNO API of libreoffice to write to existing
 libreoffice writer documents.
 
