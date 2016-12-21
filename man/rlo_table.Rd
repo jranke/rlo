@@ -52,4 +52,3 @@ which adjacent cells with identical values should be merged}
 \description{
 Inserts a table at the current position of the view cursor.
 }
-

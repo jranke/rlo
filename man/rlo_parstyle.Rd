@@ -14,4 +14,3 @@ rlo_parstyle(parstyle, warn = TRUE)
 \description{
 Apply a paragraph style if it exists
 }
-

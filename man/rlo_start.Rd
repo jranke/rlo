@@ -34,4 +34,3 @@ including \dQuote{-accept=socket,host=localhost,port=8100;urp;}.
 
 Create a new libreoffice writer document
 }
-

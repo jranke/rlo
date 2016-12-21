@@ -17,4 +17,3 @@ rlo_pdf(file = NULL, dir = ".", overwrite = FALSE)
 By default, this function takes the file name and substitutes .pdf for .odt.
 Alternatively, an output file name can be given
 }
-

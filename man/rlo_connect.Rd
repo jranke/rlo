@@ -9,4 +9,3 @@ rlo_connect()
 \description{
 Connect to the current LibreOfficeWriter document
 }
-

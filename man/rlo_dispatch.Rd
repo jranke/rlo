@@ -18,4 +18,3 @@ Use the dispatcher for GUI functions
 \examples{
 \dontrun{rlo_dispatch(".uno:Save")}
 }
-

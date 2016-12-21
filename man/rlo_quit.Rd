@@ -12,4 +12,3 @@ rlo_quit(save = TRUE)
 \description{
 Quit a libroffice instance
 }
-

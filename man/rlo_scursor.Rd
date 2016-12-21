@@ -9,4 +9,3 @@ rlo_scursor()
 \description{
 Get the current view cursor in the active document
 }
-

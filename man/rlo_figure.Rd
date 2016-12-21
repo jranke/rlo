@@ -21,4 +21,3 @@ rlo_figure(svg_file, caption, aspect = 1, width = 17, height = aspect *
 \description{
 Inserts a figure at the current position of the view cursor.
 }
-

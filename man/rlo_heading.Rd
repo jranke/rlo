@@ -16,4 +16,3 @@ rlo_heading(heading, level = 2, break_before = FALSE)
 \description{
 Insert a heading
 }
-
