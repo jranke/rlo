@@ -18,7 +18,7 @@
 #'   which adjacent cells with identical values should be merged
 #' @param numbered Should the caption of the table be numbered?
 #' @param NA_string The string used for NA values
-#' @param break_before_caption Should a page break be insersted before the caption
+#' @param break_before_caption Should a page break be inserted before the caption
 #' @param split Should it be allowed to split the table across pages
 #' @param repeat_headlines Should the headline(s) be repeated?
 #' @param charheight An optional way to specify the character height in table cells
