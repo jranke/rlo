@@ -99,4 +99,4 @@ instance started by the shortcut, a text document has to be opened.
 
 ## Documentation
 
-An online version of the package documentation can be found on [github.io](https://jranke.github.io/rlo).
+An online version of the package documentation can be found on [pkgdown.jrwb.de](http://pkgdown.jrwb.de/rlo).

@@ -11,7 +11,7 @@ Description: Utilities for writing to 'LibreOffice Writer'
 Depends:
     PythonInR
 SystemRequirements: libreoffice, python-uno
-URL: https://jranke.github.io/rlo
+URL: http://pkgdown.jrwb.de/rlo
 BugReports: https://github.com/jranke/rlo/issues
 License: GPL
 LazyLoad: yes
