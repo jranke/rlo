@@ -1,6 +1,6 @@
 # rlo
 
-[![](http://www.r-pkg.org/badges/version/rlo)](https://cran.r-project.org/package=rlo)
+[![](https://www.r-pkg.org/badges/version/rlo)](https://cran.r-project.org/package=rlo)
 
 The R package `rlo` uses the UNO API of libreoffice to write to existing
 libreoffice writer documents.
@@ -99,4 +99,4 @@ instance started by the shortcut, a text document has to be opened.
 
 ## Documentation
 
-An online version of the package documentation can be found on [pkgdown.jrwb.de](http://pkgdown.jrwb.de/rlo).
+An online version of the package documentation can be found on [pkgdown.jrwb.de](https://pkgdown.jrwb.de/rlo).
